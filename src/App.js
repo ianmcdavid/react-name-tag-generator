@@ -14,10 +14,20 @@ class App extends Component {
   };
   addName = (name) => {
     const newNameArray = [name, ...this.state.names];
-    this.setState({
-      names: newNameArray
-    });
+    this.setState({ names: newNameArray });
   };
+  componentDidMount() {
+    const savedNamesString = localStorage.getItem("savedNames");
+    if (savedNamesString) {
+      const savedNames = JSON.parse(savedNamesString);
+      this.setState({ names: savedNames });
+    }
+  }
+  componentDidUpdate() {
+    const savedNameString = JSON.stringify(this.state.names);
+    localStorage.setItem("savedNames", savedNameString);
+  }
+
   render() {
     return (
       <div className="App">
