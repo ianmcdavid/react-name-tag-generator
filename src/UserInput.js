@@ -7,7 +7,8 @@ class UserInput extends Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({ name: "" });
+    this.props.addName(this.state.name);
+    this.setState({ name: "", names: [] });
   };
   render() {
     return (
